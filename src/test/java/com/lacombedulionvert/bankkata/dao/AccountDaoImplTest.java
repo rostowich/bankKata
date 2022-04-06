@@ -4,25 +4,27 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.math.BigDecimal;
 import java.util.Optional;
-
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
-import com.lacombedulionvert.bankkata.dao.AccountDao;
-import com.lacombedulionvert.bankkata.dao.AccountDaoImpl;
 import com.lacombedulionvert.bankkata.objects.Account;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class AccountDaoImplTest {
 	
 	private AccountDao accountDao;
 
 	private Account accountSaved;
 	
+	private Account accountToSave;
+	
 	@Before
 	public void setUp() throws Exception {
 		accountDao = new AccountDaoImpl();
-		Account accountToSave = new Account("FR56908767656765", "Rostow GOKENG", new BigDecimal(500));
-		accountSaved = accountDao.save(accountToSave);
+		accountToSave = new Account("FR56908767656765", "Rostow GOKENG", new BigDecimal(500));
+		
 	}
 	
 	private Account _createSecondAccount() {
@@ -30,7 +32,8 @@ public class AccountDaoImplTest {
 	}
 
 	@Test
-	public void testSave() throws Exception {		
+	public void test1Save() throws Exception {	
+		accountSaved = accountDao.save(accountToSave);
     	Account secondAccountToSave = _createSecondAccount();
 		Account secondAccountSaved = accountDao.save(secondAccountToSave);
 		assertThat(secondAccountSaved.getId()).isEqualTo(2);
@@ -41,7 +44,7 @@ public class AccountDaoImplTest {
 	}
 	
 	@Test
-	public void testFindById() throws Exception{
+	public void test2FindById() throws Exception{
 		Optional<Account> accountFound = accountDao.findById(1L);
 		assertThat(accountFound.get()).isNotNull();
 		assertThat(accountFound.get().getId()).isEqualTo(1);
@@ -52,7 +55,7 @@ public class AccountDaoImplTest {
 	}
 	
 	@Test
-	public void testUpdate() throws Exception{
+	public void test3Update() throws Exception{
 		Account accountToUpdate = new Account("FR96TEST", "Bernard", new BigDecimal(900));
 		accountToUpdate.setId(1L);
 		Account  accountUpdated = accountDao.update(1L, accountToUpdate);

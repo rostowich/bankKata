@@ -15,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import com.lacombedulionvert.bankkata.dao.AccountDao;
+import com.lacombedulionvert.bankkata.dao.AccountOperationDao;
 import com.lacombedulionvert.bankkata.exceptions.ElementNotFoundException;
 import com.lacombedulionvert.bankkata.objects.Account;
 import com.lacombedulionvert.bankkata.services.AccountServiceImpl;
@@ -26,6 +27,9 @@ public class AccountServiceImplTest {
 	
     @Mock
     AccountDao accountDaoMock;
+    
+    @Mock
+    AccountOperationDao accountOperationDaoMock;
     
     private Account sampleAccount;	
     /**
@@ -55,13 +59,14 @@ public class AccountServiceImplTest {
     public void testFindAccountByIdReturnTheAccount() throws Exception{
     	//Mocking the accountDao method
     	when(accountDaoMock.findById(1L)).thenReturn(Optional.of(sampleAccount));
+    	when(accountOperationDaoMock.getLastAccountOperation()).thenReturn(Optional.empty());
     	Optional<Account> accountFound = accountServiceImpl.findAccountById(1L);
     	//making assertion
     	verify(accountDaoMock, times(1)).findById(1L);
     	assertThat(accountFound.isPresent());
     	assertThat(accountFound.get().getAccountNumber()).isEqualTo("FR6778998");
     	assertThat(accountFound.get().getAccountOwner()).isEqualTo("Rostow");
-    	assertThat(accountFound.get().getCurrentBalance().compareTo(new BigDecimal(10))).isEqualTo(0);
+    	assertThat(accountFound.get().getCurrentBalance().compareTo(new BigDecimal(0))).isEqualTo(0);
     }
     
 }
