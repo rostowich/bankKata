@@ -1,4 +1,4 @@
-package com.lacombedulionvert.dao;
+package com.lacombedulionvert.bankkata.dao;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

@@ -71,4 +71,10 @@ public class AccountOperation {
 		this.account = account;
 	}
 
+	public BigDecimal getAccountCurrentBalance() {
+
+		return (operationType.compareTo(OperationType.DEPOSIT) == 0) ? amount.add(accountBalance)
+				: accountBalance.subtract(amount);
+	}
+
 }
