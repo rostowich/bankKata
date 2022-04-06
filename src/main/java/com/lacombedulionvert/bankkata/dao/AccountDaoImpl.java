@@ -8,7 +8,7 @@ import com.lacombedulionvert.bankkata.objects.Account;
 
 public class AccountDaoImpl implements AccountDao {
 
-	private Map<Long, Account> accounts = new TreeMap<Long, Account>();
+	private static Map<Long, Account> accounts = new TreeMap<Long, Account>();
 
 	public Account save(Account account) {
 		Long lastKey = accounts.isEmpty() ? 0 : ((TreeMap<Long, Account>) accounts).lastKey();

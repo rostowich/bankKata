@@ -11,7 +11,7 @@ import com.lacombedulionvert.bankkata.objects.AccountOperation;
 
 public class AccountOperationDaoImpl implements AccountOperationDao {
 
-	private Map<Long, AccountOperation> accountOperations = new TreeMap<Long, AccountOperation>();
+	private static Map<Long, AccountOperation> accountOperations = new TreeMap<Long, AccountOperation>();
 
 	public AccountOperation save(AccountOperation accountOperation) {
 		Long lastKey = accountOperations.isEmpty() ? 0
