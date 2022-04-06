@@ -53,7 +53,7 @@
 					</descriptorRefs>
 					<archive>
 						<manifest>
-							<mainClass>com.lacombedulionvert.bankkata.App</mainClass>
+							<mainClass>com.lacombedulionvert.bankkata.main.Main</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
